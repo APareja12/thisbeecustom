@@ -1,17 +1,43 @@
-// import Homepage from "./pages/homepage/Homepage";
 import Topbar from "./components/topbar/Topbar";
-// import Single from "./components/single/Single";
+import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 import Settings from "./pages/settings/Settings";
+import Login from "./pages/login/Login";
+import Homepage from "./pages/homepage/Homepage";
+import Register from "./pages/register/Register";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 
 function App() {
+  const currentUser = true;
   return (
-    <>
-    <Topbar/>
-    <Settings/>
-    </>
-  );
+    <Router>
+      <Topbar/>
+    <Routes>
+    <Route exact path="/">
+          <Homepage />
+        </Route>
+        <Route path="/posts">
+          <Homepage />
+        </Route>
+        <Route path="/register">
+          {currentUser ? <Homepage /> : <Register />}
+        </Route>
+        <Route path="/login">{currentUser ? <Homepage /> : <Login />}</Route>
+        <Route path="/post/:id">
+          <Single />
+        </Route>
+        <Route path="/write">{currentUser ? <Write /> : <Login />}</Route>
+        <Route path="/settings">
+          {currentUser ? <Settings /> : <Login />}
+        </Route>
+    </Routes>
+  </Router>
+);
 }
 
 export default App;

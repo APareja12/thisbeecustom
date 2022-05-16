@@ -1,24 +1,19 @@
 import Topbar from "./components/topbar/Topbar";
+import Homepage from "./pages/homepage/Homepage";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Settings from "./pages/settings/Settings";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
-import Settings from "./pages/settings/Settings";
-import Login from "./pages/login/Login";
-import Homepage from "./pages/homepage/Homepage";
-import Register from "./pages/register/Register";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const currentUser = true;
   return (
     <Router>
-      <Topbar/>
-    <Routes>
-    <Route exact path="/">
+      <Topbar />
+      <Switch>
+        <Route exact path="/">
           <Homepage />
         </Route>
         <Route path="/posts">
@@ -35,9 +30,9 @@ function App() {
         <Route path="/settings">
           {currentUser ? <Settings /> : <Login />}
         </Route>
-    </Routes>
-  </Router>
-);
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;

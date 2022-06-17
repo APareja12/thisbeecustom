@@ -1,17 +1,22 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const dotenv = require("dotenv")
-const mongoose = require("mongoose")
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const authRoute = require("./routes/auth");
 
-dotenv.config()
+dotenv.config();
+app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URL).then(console.log("Connected to MongoDB"))
-  .catch(err=> console.log(err));
+mongoose
+    .connect(process.env.MONGO_URL)
+    .then(console.log("Connected to MongoDB"))
+    .catch(err=> console.log(err));
 
-app.use("/",(req,res) => {
-    console.log("hey this is the main url")
-})
+
+    
+app.use("/api/auth", authRoute);
+
 
 app.listen("4000", () => {
     console.log("Backend is running");
-})
+});
